@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header';
-import { useParams } from 'react-router-dom';
-import Fingercomp from './Fingerprint-cuate.svg'
+import { Navigate, useParams } from 'react-router-dom';
+import Fingercomp from './security-animate.svg'
 import axios from 'axios';
 
 function UserUpdate() {
 
-  const [userData, setUserData] = useState('');
+  const [userData, setUserData] = useState({
+    name : '',
+    email : '',
+    connumber : '',
+    nic: '',
+    gender: '',
+    address: '',
+    points:'',
+  });
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -15,69 +24,94 @@ function UserUpdate() {
 
   const fetchData = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8070/user/nic/${id}`);
+      const response = await axios.get(`http://localhost:8070/user/id/${id}`);
       setUserData(response.data.user);
-      console.log(userData);
+      console.log("Fetched User Data ! :" ,response.data.user);
       document.body.style.overflow = 'hidden';
     } catch (error) {
       console.log(error);
     }
   }
 
+
+  const handleInputChange = (e) =>{
+    const {name,value} = e.target;
+    console.log("Input changed - Name:", name, "Value:", value);
+    setUserData((prevData) =>({
+      ...prevData,
+      [name]:value,
+    }))
+  };
+
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+
+    try {
+       await axios.put(`http://localhost:8070/user/update/${id}`,userData);
+       alert("User Data Updated!");
+       window.location.href=`/find`
+       return;
+    } catch (error) {
+      console.log(error);
+      alert("Failed To Update!")
+    }
+  };
+
   return (
     <div>
       <Header />
-      <div class="grid grid-cols-2 gap-3">
-        <div class="mt-2 ml-5">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="mt-2 ml-5">
 
-          <form class="max-w-md mx-auto mt-2">
+          <form className="max-w-md mx-auto mt-2" onSubmit={handleSubmit}>
 
-            <div class="mb-4">
-              <label for="name" class="block text-sm text-xl">Name</label>
-              <input type="name" class="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="name" placeholder="&nbsp;&nbsp;Name" value={userData.name} />
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-sm text-xl">Name</label>
+              <input type="name" className="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="name" name="name" placeholder="&nbsp;&nbsp;Name" value={userData.name} onChange={handleInputChange} />
             </div>
 
-            <div class="mb-4">
-              <label for="Email" class="block text-sm text-xl">Email</label>
-              <input type="email" class="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="email" placeholder="&nbsp;&nbsp;email" value={userData.email} />
+            <div className="mb-4">
+              <label htmlFor="Email" className="block text-sm text-xl">Email</label>
+              <input type="email" className="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="email" name="email" placeholder="&nbsp;&nbsp;email" value={userData.email} onChange={handleInputChange}/>
             </div>
 
-            <div class="mb-4">
-              <label for="connumber" class="block text-sm text-xl">Contact Number</label>
-              <input type="connumber" class="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="connumber" placeholder="&nbsp;&nbsp;Contact Number" value={userData.connumber} />
+            <div className="mb-4">
+              <label htmlFor="connumber" className="block text-sm text-xl">Contact Number</label>
+              <input type="connumber" className="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="connumber" name="connumber" placeholder="&nbsp;&nbsp;Contact Number" value={userData.connumber} onChange={handleInputChange}/>
             </div>
 
-            <div class="mb-4">
-              <label for="nic" class="block text-sm text-xl">NIC</label>
-              <input type="nic" class="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="nic" placeholder="&nbsp;&nbsp;NIC" value={userData.nic} />
+            <div className="mb-4">
+              <label htmlFor="nic" className="block text-sm text-xl">NIC</label>
+              <input type="nic" className="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="nic" name="nic" placeholder="&nbsp;&nbsp;NIC" value={userData.nic} onChange={handleInputChange}/>
             </div>
 
-            <div class="mb-4">
-              <label for="address" class="block text-sm text-xl">Address</label>
-              <input type="address" class="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="address" placeholder="&nbsp;&nbsp;Address" value={userData.address} />
+            <div className="mb-4">
+              <label htmlFor="address" className="block text-sm text-xl">Address</label>
+              <input type="address" className="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="address" name="address" placeholder="&nbsp;&nbsp;Address" value={userData.address} onChange={handleInputChange}/>
             </div>
 
 
-            <div class="mb-4 grid grid-cols-2 gap-4">
+            <div className="mb-4 grid grid-cols-2 gap-4">
 
               <div>
-                <label for="gender" class="block text-sm text-xl">Gender</label>
-                <input type="text" class="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="gender" placeholder="&nbsp;&nbsp;Gender" value={userData.gender} />
+                <label htmlFor="gender" className="block text-sm text-xl">Gender</label>
+                <input type="text" className="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="gender" name="gender" placeholder="&nbsp;&nbsp;Gender" value={userData.gender} onChange={handleInputChange}/>
               </div>
 
               <div>
-                <label for="points" class="block text-sm text-xl">Points</label>
-                <input type="text" class="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="points" placeholder="&nbsp;&nbsp;Points" value={userData.points} />
+                <label htmlFor="points" className="block text-sm text-xl">Points</label>
+                <input type="text" className="mt-2 block w-full h-10 rounded-md shadow-sm border-stone-800" id="points" placeholder="&nbsp;&nbsp;Points" value={userData.points} disabled/>
               </div>
             </div>
 
 
-            <button type="submit" class="w-full h-10 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base text-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Next</button>
+            <button type="submit" className="w-full h-10 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base text-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Next</button>
 
           </form>
         </div>
-        <div class="scale-95">
-          <img src={Fingercomp} style={{ maxWidth: '100%', maxHeight: '90%' }} />
+        <div>
+          <img src={Fingercomp} style={{ maxWidth: '100%', maxHeight: '95%' }} />
         </div>
       </div>
     </div>

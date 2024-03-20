@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function UserFind() {
 
+  document.body.style.overflow = 'hidden';
 
   const [nic, setNic] = useState('');
   const [error, setError] = useState('');
@@ -38,17 +39,17 @@ function UserFind() {
   return (
     <div>
       <Header />
-      <div class="grid grid-cols-2 gap-3 h-screen ">
-        <div class="mt-4 ml-5">
-          <label for="nic">Input NIC Number:</label>
-          <div className='flex'>
+      <div className="grid grid-cols-2 gap-3 h-screen ">
+        <div className="mt-4 ml-5">
+          <label htmlFor="nic">Input NIC Number:</label>
+          <div className='flex mt-3'>
             <input type='text' name='nic' className='border-2 w-full h-10' value={nic} onChange={(e) => setNic(e.target.value)} />
-            <button type='submit' className='text-white bg-gray-800 font-medium rounded-sm text-sm px-5 py-2.5 dark:hover:bg-green-700 dark:focus:ring-green-800 ml-2' onClick={handlefind}>Find!</button>
+            <button type='submit' className='text-white bg-gray-800 font-medium rounded-sm text-sm px-5 py-2.5 dark:hover:bg-indigo-600 dark:focus:ring-green-800 ml-2' onClick={handlefind}>Find!</button>
           </div>
           {error && <div className="text-red-500">{error}</div>}
         </div>
-        <div class="h-screen">
-          <img src={Fingercomp} className='h-screen' />
+        <div>
+          <img src={Fingercomp} style={{ maxWidth: '100%', maxHeight: '85%' }} />
         </div>
       </div>
 

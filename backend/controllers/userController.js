@@ -73,6 +73,29 @@ const GetUserbyNic = async (req, res, next) => {
 
 }
 
+const GetUserbyId = async (req, res, next) => {
+
+    const id = req.params.id;
+
+    let user;
+
+    try {
+        user = await User.findById(id)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+    if (!user) {
+
+        return res.status(400).json({ message: "No User Found !" })
+
+    } else {
+
+        return res.status(200).json({ message: `User Found Under Id ${id}`, user });
+    }
+
+}
 
 const UpdateUser = async (req, res, next) => {
 
@@ -136,5 +159,6 @@ const DeleteUser = async (req, res, next) => {
 exports.GetAllUsers = GetAllUsers;
 exports.CreateUser = CreateUser;
 exports.GetUserbyNic = GetUserbyNic;
+exports.GetUserbyId = GetUserbyId;
 exports.UpdateUser = UpdateUser;
 exports.DeleteUser = DeleteUser;

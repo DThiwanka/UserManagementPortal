@@ -1,7 +1,10 @@
 import React from 'react'
 import Header from '../Header/Header'
+import Fingercomp from './Fingerprint-cuate.svg'
 
 function UserHome() {
+
+  document.body.style.overflow = 'hidden';
 
   function cashier() {
     window.location.href = '/find';
@@ -12,12 +15,16 @@ function UserHome() {
       <Header />
 
       <div className='flex max-auto items-center'>
-        <h1 className='content-center text-2xl m-5 font-bold '>Cashier Side</h1>
+        <h1 className='content-center text-xl m-5 '>Cashier Side</h1>
 
-        <button class="bg-amber-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" onClick={cashier}>Cashier</button>
+        <button className="text-white bg-gray-800 font-medium rounded-sm text-sm px-5 py-2.5 dark:hover:bg-indigo-600 dark:focus:ring-green-800 ml-2" onClick={cashier}>Cashier</button>
+
       </div>
 
 
+        <div>
+          <img src={Fingercomp} style={{ maxWidth: '100%', maxHeight: '85%' }} />
+        </div>
     </div>
 
   )
