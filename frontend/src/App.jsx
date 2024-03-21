@@ -4,6 +4,7 @@ import UserHome from "./Components/User/UserHome";
 import UserProfile from "./Components/User/UserProfile";
 import UserFind from "./Components/User/UserFind";
 import UserUpdate from "./Components/User/UserUpdate";
+import UserAdd from "./Components/UserAdd/UserAdd";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/" exact element={<UserHome/>}/>
+        <Route path="/add" exact element={<UserAdd/>}/>
         <Route path="/find" element={<UserFind/>}/>
         <Route path="/profile/:id" element={<UserProfile/>}/>
         <Route path="/profile/update/:id" element={<UserUpdate/>}/>

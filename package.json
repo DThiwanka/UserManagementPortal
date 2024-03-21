@@ -1,0 +1,21 @@
+{
+  "name": "UserManagementProfile",
+  "version": "1.0.0",
+  "description": "UserManagementProfile using Tailwind CSS",
+  "main": "index.js",
+  "scripts": {
+    "StartBackend" : "cd backend && npm run dev",
+    "StartFrontend": "cd frontend && npm start",
+    "StartAll": "concurrently \"npm run StartBackend\" \"npm run StartFrontend\""
+  },
+  "keywords": [
+    "tailwind",
+    "UserManagementProfile",
+    "Vitejs"
+  ],
+  "author": "Dulaj Thiwanka",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
