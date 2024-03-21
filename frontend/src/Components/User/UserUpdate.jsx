@@ -24,7 +24,7 @@ function UserUpdate() {
 
   const fetchData = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8070/user/id/${id}`);
+      const response = await axios.get(`https://usermanagementportal-2.onrender.com/user/id/${id}`);
       setUserData(response.data.user);
       console.log("Fetched User Data ! :" ,response.data.user);
       document.body.style.overflow = 'hidden';
@@ -48,7 +48,7 @@ function UserUpdate() {
     e.preventDefault();
 
     try {
-       await axios.put(`http://localhost:8070/user/update/${id}`,userData);
+       await axios.put(`https://usermanagementportal-2.onrender.com/user/update/${id}`,userData);
        alert("User Data Updated!");
        window.location.href=`/find`
        return;

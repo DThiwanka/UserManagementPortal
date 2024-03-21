@@ -17,7 +17,7 @@ function UserProfile() {
 
   const fetchData = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8070/user/nic/${id}`);
+      const response = await axios.get(`https://usermanagementportal-2.onrender.com/user/nic/${id}`);
       setUserData(response.data.user);
       document.body.style.overflow = 'hidden';
     } catch (error) {

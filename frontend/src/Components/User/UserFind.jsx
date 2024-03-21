@@ -15,7 +15,7 @@ function UserFind() {
 
   async function handlefind(e) {
     try {
-      const response = await fetch(`http://localhost:8070/user/nic/${nic}`);
+      const response = await fetch(`https://usermanagementportal-2.onrender.com/user/nic/${nic}`);
       if (!response.ok) {
         throw new Error('Failed to fetch Data!');
       }

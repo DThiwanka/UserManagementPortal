@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "StartBackend" : "cd backend && npm run dev",
-    "StartFrontend": "cd frontend && npm start",
+    "StartFrontend": "cd frontend && npm run dev ",
     "StartAll": "concurrently \"npm run StartBackend\" \"npm run StartFrontend\""
   },
   "keywords": [
